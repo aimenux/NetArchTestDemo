@@ -1,5 +1,8 @@
 using System.Reflection;
 using Api;
+using Api.Controllers;
+using Api.Mappers;
+using Api.Payloads;
 using Domain.Models;
 using FluentAssertions;
 using Infrastructure;
@@ -38,13 +41,52 @@ namespace UnitTests
         }
 
         [Test]
-        [Ignore("Not working as expected")]
+        [Ignore("Issue https://github.com/BenMorris/NetArchTest/issues/40")]
         public void Should_Api_Depends_On_Domain_And_Infrastructure()
         {
             Types.InAssembly(ApiAssembly)
                 .That().ResideInNamespace(ApiNamespace)
                 .Should().HaveDependencyOn(DomainNamespace)
                 .And().HaveDependencyOn(InfrastructureNamespace)
+                .GetResult().IsSuccessful
+                .Should().BeTrue();
+        }
+
+        [Test]
+        public void Should_Api_Depends_On_Domain()
+        {
+            var excludedNames = new[]
+            {
+                nameof(Program),
+                nameof(ProductDto),
+                nameof(IProductMapper)
+            };
+
+            Types.InAssembly(ApiAssembly)
+                .That().ResideInNamespace(ApiNamespace)
+                .And().DoNotHaveNames(excludedNames)
+                .Should().HaveDependencyOn(DomainNamespace)
+                .GetResult().IsSuccessful
+                .Should().BeTrue();
+        }
+
+        [Test]
+        [Ignore("Issue https://github.com/BenMorris/NetArchTest/issues/40")]
+        public void Should_Api_Depends_On_Infrastructure()
+        {
+            var excludedNames = new[]
+            {
+                nameof(Program),
+                nameof(ProductDto),
+                nameof(ProductMapper),
+                nameof(IProductMapper),
+                nameof(ProductController)
+            };
+
+            Types.InAssembly(ApiAssembly)
+                .That().ResideInNamespace(ApiNamespace)
+                .And().DoNotHaveNames(excludedNames)
+                .Should().HaveDependencyOn(InfrastructureNamespace)
                 .GetResult().IsSuccessful
                 .Should().BeTrue();
         }
