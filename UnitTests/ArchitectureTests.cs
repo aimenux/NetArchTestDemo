@@ -71,7 +71,6 @@ namespace UnitTests
         }
 
         [Test]
-        [Ignore("Issue https://github.com/BenMorris/NetArchTest/issues/40")]
         public void Should_Api_Depends_On_Infrastructure()
         {
             var excludedNames = new[]
