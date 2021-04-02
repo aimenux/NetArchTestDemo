@@ -13,9 +13,10 @@ namespace UnitTests
 {
     public class ArchitectureTests
     {
-        private const string ApiNamespace = "Api";
-        private const string DomainNamespace = "Domain";
-        private const string InfrastructureNamespace = "Infrastructure";
+        private static string ApiNamespace => ApiAssembly.GetName().Name;
+        private static string DomainNamespace => DomainAssembly.GetName().Name;
+        private static string InfrastructureNamespace => InfrastructureAssembly.GetName().Name;
+
         private static readonly Assembly ApiAssembly = typeof(Startup).Assembly;
         private static readonly Assembly DomainAssembly = typeof(Product).Assembly;
         private static readonly Assembly InfrastructureAssembly = typeof(ProductRepository).Assembly;
