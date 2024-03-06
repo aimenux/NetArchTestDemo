@@ -1,4 +1,5 @@
-![.NET Core](https://github.com/aimenux/NetArchTestDemo/workflows/.NET%20Core/badge.svg)
+[![.NET](https://github.com/aimenux/NetArchTestDemo/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/aimenux/NetArchTestDemo/actions/workflows/ci.yml)
+
 # NetArchTestDemo
 ```
 Using NetArchTest library to enforce architecture rules
