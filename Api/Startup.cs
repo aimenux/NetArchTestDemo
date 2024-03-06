@@ -3,64 +3,35 @@ using Domain.Ports;
 using Domain.Services;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 
-namespace Api
+namespace Api;
+
+public class Startup
 {
-    public class Startup
+    public void ConfigureServices(WebApplicationBuilder builder)
     {
-        private const string ApiVersion = "V1";
-        private const string ApiName = "NetArchTestDemo";
+        builder.Services.AddControllers();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+        builder.Services.AddRouting(options => options.LowercaseUrls = true);
+        builder.Services.AddSingleton<IProductMapper, ProductMapper>();
+        builder.Services.AddSingleton<IProductService, ProductService>();
+        builder.Services.AddSingleton<IProductRepository, ProductRepository>();
+    }
 
-        public Startup(IConfiguration configuration)
+    public void Configure(WebApplication app)
+    {
+        if (app.Environment.IsDevelopment())
         {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
-
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllers();
-
-            services.AddSingleton<IProductMapper, ProductMapper>();
-            services.AddSingleton<IProductService, ProductService>();
-            services.AddSingleton<IProductRepository, ProductRepository>();
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc(ApiVersion, new OpenApiInfo { Title = ApiName, Version = ApiVersion });
-            });
-        }
-
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
+            app.UseDeveloperExceptionPage();
             app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.DisplayRequestDuration();
-                c.SwaggerEndpoint($"/swagger/{ApiVersion}/swagger.json", ApiName);
-            });
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseSwaggerUI(options => options.DisplayRequestDuration());
         }
+        
+        app.UseHttpsRedirection();
+        app.UseAuthorization();
+        app.MapControllers();
     }
 }

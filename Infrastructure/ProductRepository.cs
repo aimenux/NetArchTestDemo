@@ -10,19 +10,19 @@ namespace Infrastructure
         {
             return new List<Product>
             {
-                new Product
+                new()
                 {
                     Id = 1,
                     Name = "Apple",
                     Price = 2.5m
                 },
-                new Product
+                new()
                 {
                     Id = 2,
                     Name = "Orange",
                     Price = 3.5m
                 },
-                new Product
+                new()
                 {
                     Id = 3,
                     Name = "Banana",

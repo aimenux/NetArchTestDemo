@@ -80,7 +80,7 @@ namespace UnitTests
                 nameof(ProductDto),
                 nameof(ProductMapper),
                 nameof(IProductMapper),
-                nameof(ProductController)
+                nameof(ProductsController)
             };
 
             Types.InAssembly(ApiAssembly)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Domain.Models;
 using Domain.Ports;
 
@@ -10,7 +11,7 @@ namespace Domain.Services
 
         public ProductService(IProductRepository productRepository)
         {
-            _productRepository = productRepository;
+            _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
         }
 
         public IEnumerable<Product> GetProducts()

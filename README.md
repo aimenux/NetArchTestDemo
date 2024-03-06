@@ -9,4 +9,4 @@ In this demo, i m using [NetArchTest](https://github.com/BenMorris/NetArchTest) 
 - `Infrastructure` depends on `Domain`
 - `Domain` depends on nothing
 
-**`Tools`** : vs19, net core 3.1
+**`Tools`** : net 8.0, netarchtest, nunit, fluent-assertions
