@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AwesomeAssertions" />
+    <PackageReference Include="NetArchTest.Rules" />
+    <PackageReference Include="nunit" />
+    <PackageReference Include="NUnit3TestAdapter">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Api\Api.csproj" />
+    <ProjectReference Include="..\..\src\Application\Application.csproj" />
+    <ProjectReference Include="..\..\src\Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\src\Infrastructure\Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
