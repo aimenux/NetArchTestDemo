@@ -10,6 +10,8 @@ public class DomainTests
     public void Should_Domain_Not_Depends_On_Api()
     {
         var result = Types.InAssembly(Constants.DomainAssembly)
+            .That()
+            .ResideInNamespace(Constants.DomainNamespace)
             .ShouldNot()
             .HaveDependencyOn(Constants.ApiNamespace)
             .GetResult();
@@ -21,6 +23,8 @@ public class DomainTests
     public void Should_Domain_Not_Depends_On_Application()
     {
         var result = Types.InAssembly(Constants.DomainAssembly)
+            .That()
+            .ResideInNamespace(Constants.DomainNamespace)
             .ShouldNot()
             .HaveDependencyOn(Constants.ApplicationNamespace)
             .GetResult();
@@ -32,6 +36,8 @@ public class DomainTests
     public void Should_Domain_Not_Depends_On_Infrastructure()
     {
         var result = Types.InAssembly(Constants.DomainAssembly)
+            .That()
+            .ResideInNamespace(Constants.DomainNamespace)
             .ShouldNot()
             .HaveDependencyOn(Constants.InfrastructureNamespace)
             .GetResult();

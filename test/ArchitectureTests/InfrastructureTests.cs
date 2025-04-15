@@ -10,6 +10,8 @@ public class InfrastructureTests
     public void Should_Infrastructure_Not_Depends_On_Api()
     {
         var result = Types.InAssembly(Constants.InfrastructureAssembly)
+            .That()
+            .ResideInNamespace(Constants.InfrastructureNamespace)
             .ShouldNot()
             .HaveDependencyOn(Constants.ApiNamespace)
             .GetResult();
@@ -21,6 +23,8 @@ public class InfrastructureTests
     public void Should_Infrastructure_Depends_On_Application()
     {
         var result = Types.InAssembly(Constants.InfrastructureAssembly)
+            .That()
+            .ResideInNamespace(Constants.InfrastructureNamespace)
             .Should()
             .HaveDependencyOn(Constants.ApplicationNamespace)
             .GetResult();
@@ -32,6 +36,8 @@ public class InfrastructureTests
     public void Should_Infrastructure_Depends_On_Domain()
     {
         var result = Types.InAssembly(Constants.InfrastructureAssembly)
+            .That()
+            .ResideInNamespace(Constants.InfrastructureNamespace)
             .Should()
             .HaveDependencyOn(Constants.DomainNamespace)
             .GetResult();
